@@ -3,6 +3,7 @@
 This mod is a modification of [Compact Expansion](https://www.curseforge.com/minecraft/mc-mods/compact-expansion) which adds a configuration file to be able to choose any size of compact machines you want.
 
 Configuration file is found at ``minecraft\config`` and is named ``compactexpansion-common.toml``.
+Configuration file will appear after a game start.
 
 Default configuration file:
 ````toml
