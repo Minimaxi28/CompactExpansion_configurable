@@ -1,24 +1,34 @@
-# Compact Expansion
+# Compact Expansion (configurable)
 
-[![CurseForge](http://cf.way2muchnoise.eu/full_895781_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/compact-expansion)
-[![Issues](https://img.shields.io/github/issues/Robocraft999/CompactExpansion)](https://github.com/Robocraft999/CompactExpansion/issues)
+This mod is a modification of [Compact Expansion](https://www.curseforge.com/minecraft/mc-mods/compact-expansion) which adds a configuration file to be able to choose any size of compact machines you want.
 
-Adds bigger compact machines
+Configuration file is found at ``minecraft\config`` and is named ``compactexpansion-common.toml``.
 
-## Features
-
-### Compact Machines 5.1.0
-
-The current sizes are replaced by these:
-- 3³ -> 7³
-- 5³ -> 15³
-- 7³ -> 31³
-- 9³ -> 63³
-- 11³ -> 127³
-- 13³ -> 255³
-
-### Compact Machines 5.2.0
-
-Not out yet
-
-The sizes above are now added instead of replacing the current ones.
+Default configuration file:
+````toml
+["Room Sizes"]
+    #Values will be floored to the nearest odd number (e.g., 20 = 19, 12 = 11).
+    #Values represent the internal size of the rooms in blocks (distance between walls).
+    #WARNING: Very large values may cause server lag during room generation.
+    #WARNING: Lowering these values can corrupt existing rooms!
+    #Before changing values, empty all affected Compact Machines, change the values, then place new ones.
+    #Changing values requires a restart.
+    #
+    #Tiny room (original size = 3)
+    #Range: 1 ~ 297
+    tiny = 5
+    #Small room (original size = 5)
+    #Range: 1 ~ 297
+    small = 9
+    #Normal room (original size = 7)
+    #Range: 1 ~ 297
+    normal = 13
+    #Large room (original size = 9)
+    #Range: 1 ~ 297
+    large = 17
+    #Giant room (original size = 11)
+    #Range: 1 ~ 297
+    giant = 21
+    #Maximum room (original size = 13)
+    #Range: 1 ~ 297
+    maximum = 25

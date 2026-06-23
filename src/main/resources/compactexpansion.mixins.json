@@ -8,11 +8,10 @@
     "CompactMachineBlockMixin",
     "CompactMachineItemMixin",
     "CompactStructureGeneratorMixin",
-    "RoomEventHandlerMixin",
-    "RoomSizeMixin"
+    "RoomEventHandlerMixin"
   ],
-  "client": [
-  ],
+  "client": [],
+  "server": [],
   "injectors": {
     "defaultRequire": 1
   }

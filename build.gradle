@@ -181,7 +181,8 @@ dependencies {
 
     //5.1.0
     //implementation fg.deobf("dev.compactmods.compactmachines:forge-api:${compactmachines_version}")
-    implementation fg.deobf("dev.compactmods.compactmachines:compactmachines-forge:${compactmachines_version}")
+    //implementation fg.deobf("dev.compactmods.compactmachines:compactmachines-forge:${compactmachines_version}")
+    implementation fg.deobf(files("libs/compactmachines-forge-6.0.3.jar"))
 
 
     // For more info:
