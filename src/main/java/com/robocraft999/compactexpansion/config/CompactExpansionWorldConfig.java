@@ -2,16 +2,15 @@ package com.robocraft999.compactexpansion.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class CompactExpansionConfig {
-
+public class CompactExpansionWorldConfig {
     public static final ForgeConfigSpec SPEC;
 
-    public static final ForgeConfigSpec.IntValue TINY_SIZE;
-    public static final ForgeConfigSpec.IntValue SMALL_SIZE;
-    public static final ForgeConfigSpec.IntValue NORMAL_SIZE;
-    public static final ForgeConfigSpec.IntValue LARGE_SIZE;
-    public static final ForgeConfigSpec.IntValue GIANT_SIZE;
-    public static final ForgeConfigSpec.IntValue MAXIMUM_SIZE;
+    public static ForgeConfigSpec.IntValue TINY_SIZE;
+    public static ForgeConfigSpec.IntValue SMALL_SIZE;
+    public static ForgeConfigSpec.IntValue NORMAL_SIZE;
+    public static ForgeConfigSpec.IntValue LARGE_SIZE;
+    public static ForgeConfigSpec.IntValue GIANT_SIZE;
+    public static ForgeConfigSpec.IntValue MAXIMUM_SIZE;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -26,27 +25,27 @@ public class CompactExpansionConfig {
         builder.comment("");
 
         TINY_SIZE = builder
-                .comment("Tiny room (original size = 3)")
+                .comment("Tiny room (default = 5)")
                 .defineInRange("tiny", 5, 1, 297);
 
         SMALL_SIZE = builder
-                .comment("Small room (original size = 5)")
+                .comment("Small room (default = 9)")
                 .defineInRange("small", 9, 1, 297);
 
         NORMAL_SIZE = builder
-                .comment("Normal room (original size = 7)")
+                .comment("Normal room (default = 13)")
                 .defineInRange("normal", 13, 1, 297);
 
         LARGE_SIZE = builder
-                .comment("Large room (original size = 9)")
+                .comment("Large room (default = 17)")
                 .defineInRange("large", 17, 1, 297);
 
         GIANT_SIZE = builder
-                .comment("Giant room (original size = 11)")
+                .comment("Giant room (default = 21)")
                 .defineInRange("giant", 21, 1, 297);
 
         MAXIMUM_SIZE = builder
-                .comment("Maximum room (original size = 13)")
+                .comment("Maximum room (default = 25)")
                 .defineInRange("maximum", 25, 1, 297);
 
         builder.pop();
