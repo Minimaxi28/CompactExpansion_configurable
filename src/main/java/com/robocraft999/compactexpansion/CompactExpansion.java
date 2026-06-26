@@ -2,21 +2,22 @@ package com.robocraft999.compactexpansion;
 
 import com.mojang.logging.LogUtils;
 import com.robocraft999.compactexpansion.config.CompactExpansionWorldConfig;
+
 import dev.compactmods.machines.api.room.RoomSize;
+
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.common.MinecraftForge;
+
 import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 @Mod(CompactExpansion.MODID)
 public class CompactExpansion {
@@ -32,6 +33,9 @@ public class CompactExpansion {
         );
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onConfigReload);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onConfigLoad);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -40,8 +44,6 @@ public class CompactExpansion {
             try {
                 internalSizeField = RoomSize.class.getDeclaredField("internalSize");
                 internalSizeField.setAccessible(true);
-
-                createDefaultConfig();
             } catch (Exception e) {
                 LOGGER.error("Failed to initialize!", e);
             }
@@ -53,24 +55,18 @@ public class CompactExpansion {
         applyCurrentConfig();
     }
 
-    private void createDefaultConfig() {
-        try {
-            Path defaultConfigDir = FMLPaths.GAMEDIR.get().resolve("defaultconfigs");
-            if (!Files.exists(defaultConfigDir)) {
-                Files.createDirectories(defaultConfigDir);
-            }
-
-            Path defaultConfigPath = defaultConfigDir.resolve("compactexpansion-server.toml");
-
-            if (!Files.exists(defaultConfigPath)) {
-                LOGGER.info("Default config not found, will be created");
-            }
-        } catch (Exception e) {
-            LOGGER.error("Failed to create default config directory", e);
-        }
+    @SubscribeEvent
+    public void onConfigLoad(ModConfigEvent.Loading event) {
+        applyCurrentConfig();
     }
 
-    private void applyCurrentConfig() {
+    @SubscribeEvent
+    public void onConfigReload(ModConfigEvent.Reloading event) {
+        LOGGER.info("Config file changed, applying new room sizes.");
+        applyCurrentConfig();
+    }
+
+    private static void applyCurrentConfig() {
         if (internalSizeField == null) {
             LOGGER.error("Cannot apply config: internalSizeField not initialized");
             return;
@@ -99,7 +95,7 @@ public class CompactExpansion {
         }
     }
 
-    private void setRoomSize(RoomSize roomSize, int newSize) throws Exception {
+    private static void setRoomSize(RoomSize roomSize, int newSize) throws Exception {
         try {
             internalSizeField.set(roomSize, newSize);
         } catch (IllegalAccessException e) {

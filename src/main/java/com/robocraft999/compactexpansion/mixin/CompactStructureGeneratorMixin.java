@@ -49,8 +49,6 @@ public abstract class CompactStructureGeneratorMixin {
             }
 
             compactExpansion$generateChunkgenBlocks(world, machineInternal);
-            //works too but is 4x more blocks
-            //BlockPos.betweenClosedStream(machineInternal).forEach((p) -> world.setBlock(p, Blocks.DIRT.defaultBlockState(), 7));
 
             BlockPos.betweenClosedStream(machineInternal).forEach((p) -> world.setBlock(p, Blocks.AIR.defaultBlockState(), 7));
         }
