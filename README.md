@@ -20,10 +20,10 @@ Default configuration file:
 	#
 	#Tiny room (original = 3 ; default = 5)
 	#Range: 3 ~ 297
-	tiny = 51
+	tiny = 5
 	#Small room (original = 5 ; default = 9)
 	#Range: 3 ~ 297
-	small = 51
+	small = 9
 	#Normal room (original = 7 ; default = 13)
 	#Range: 3 ~ 297
 	normal = 13
